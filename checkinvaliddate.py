@@ -4,7 +4,7 @@
 
 import redis
 from crawlerutils import fetch_url_content
-from crawlerutils import gen_api_url
+from crawlerutils import gen_list_url
 
 
 def get_invalid_dates(host, port, db):
@@ -22,7 +22,6 @@ if __name__ == '__main__':
     print 'invalidset: ', invalidset
     for item in invalidset:
         date = item[0]
-        url = gen_api_url(date)
+        url = gen_list_url(date)
         content = fetch_url_content(url=url, port=80, timeout=15)
         print 'refetch content:{content}'.format(content=content)
-
