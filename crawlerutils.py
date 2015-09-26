@@ -19,6 +19,12 @@ def fetch_url_content(url, port, timeout):
     return content
 
 
+def gen_api_url(date):
+    prefix_url = 'http://news.at.zhihu.com/api/4/news/before/'
+    url = ''.join([prefix_url, date])
+    return url
+
+
 def gen_api_date(from_year, to_year):
     date_list = []
 
