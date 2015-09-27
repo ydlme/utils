@@ -10,7 +10,7 @@ app = Celery(backend='amqp', broker='amqp://')
 
 
 @app.task
-def redis_insert(date):
+def redis_fetch_dailylist(date):
     prefix_url = 'http://news.at.zhihu.com/api/4/news/before/'
     cache = redis.Redis(host='localhost', port=6379, db=0)
     url = ''.join([prefix_url, date])

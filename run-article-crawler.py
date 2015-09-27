@@ -9,6 +9,7 @@ import redis
 if __name__ == '__main__':
     dailylist = redis.Redis(host='localhost', port=6379, db=0)
     article_cnt, failed_cnt = 0, 0
+    print 'begin fetch all articles'
     for date in dailylist.keys():
         content = dailylist[date]
         json_content = json.loads(content)
