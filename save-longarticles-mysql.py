@@ -5,6 +5,8 @@ import MySQLdb
 import redis
 import json
 import sys
+from ArticlesJsonChecker import get_jsonerror_articleids
+
 
 if __name__ == '__main__':
     reload(sys)
@@ -16,12 +18,12 @@ if __name__ == '__main__':
 
         cur = conn.cursor()
         cache = redis.Redis(host='localhost', port=6379, db=1)
-        keys = cache.keys()
-        print 'json records: {num}'.format(num=len(keys))
+        keys = get_jsonerror_articleids()
+        print 'json encoding error records: {num}'.format(num=len(keys))
         invalid_cnt = 0
         for id in keys:
-            if len(cache[id]) < 10:
-                invalid_cnt = invalid_cnt + 1
+            if not cache.exists(str(id)):
+                print 'cache not exists: ', id
                 continue
             content = cache[id]
             json_content = json.loads(content)
